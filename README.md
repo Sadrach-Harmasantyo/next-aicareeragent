@@ -1,36 +1,139 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next AI Career Agent
 
-## Getting Started
+![Next AI Career Agent](./public/preview-next-aicareeragent.png)
 
-First, run the development server:
+## Revolutionize Your Career Journey with AI
+
+Next AI Career Agent is a cutting-edge platform that leverages artificial intelligence to provide personalized career guidance, skill development roadmaps, resume analysis, and more. Whether you're starting your career, looking to switch paths, or aiming for advancement, our suite of AI-powered tools will help you navigate your professional journey with confidence.
+
+## 🚀 Features
+
+### 🤖 AI Career Q&A Chat
+
+Get instant answers to all your career-related questions. Our AI career coach provides professional guidance on job searching, interview preparation, skill development, career transitions, and industry trends.
+
+### 📝 AI Resume Analyzer
+
+Upload your resume and receive a comprehensive analysis with actionable feedback. Our AI evaluates your resume's strengths and weaknesses, providing section-by-section scoring and specific recommendations for improvement.
+
+### 🗺️ Career Roadmap Generator
+
+Input your desired position or skills, and our AI will create a personalized learning roadmap. Visualize your career development path with a clear, step-by-step guide showing what to learn and in what order.
+
+### ✉️ Cover Letter Generator
+
+Create tailored cover letters that highlight your relevant skills and experiences for specific job applications.
+
+## 💻 Tech Stack
+
+- **Frontend**: Next.js, React, Tailwind CSS
+- **Authentication**: Clerk
+- **Database**: PostgreSQL (via Neon DB)
+- **AI Integration**: Gemini AI
+- **File Storage**: ImageKit
+- **Background Processing**: Inngest
+- **Styling**: Tailwind CSS with custom components
+
+## 🛠️ Getting Started
+
+### Prerequisites
+
+- Node.js (v18 or higher)
+- npm or yarn
+- PostgreSQL database (or Neon DB account)
+- Clerk account for authentication
+- Gemini API key
+- ImageKit account
+
+### Installation
+
+1. Clone the repository
+
+```bash
+git clone https://github.com/yourusername/next-aicareeragent.git
+cd next-aicareeragent
+```
+
+2. Install dependencies
+
+```bash
+npm install
+# or
+yarn install
+```
+
+3. Set up environment variables
+
+   - Copy `.env.example` to `.env.local`
+   - Fill in the required environment variables
+
+4. Run the development server
 
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📊 Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+├── app/                  # Next.js app directory
+│   ├── (auth)/           # Authentication routes
+│   ├── (routes)/         # Main application routes
+│   │   ├── ai-tools/     # AI tools implementation
+│   │   ├── dashboard/    # Dashboard components
+│   │   └── my-history/   # User history components
+│   ├── api/              # API routes
+│   └── _components/      # Shared components
+├── components/           # UI components
+├── configs/              # Configuration files
+├── context/              # React context providers
+├── inngest/              # Inngest functions
+└── public/               # Static assets
+```
 
-## Learn More
+## 🔒 Authentication
 
-To learn more about Next.js, take a look at the following resources:
+The application uses Clerk for authentication, providing secure user management with features like:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Email/password authentication
+- Social login options
+- User profile management
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🌐 API Integration
 
-## Deploy on Vercel
+The application integrates with several APIs:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Gemini AI**: Powers the AI chat, resume analysis, and roadmap generation
+- **ImageKit**: Handles file storage for uploaded resumes
+- **Inngest**: Manages background processing for AI tasks
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📱 Responsive Design
+
+The application is fully responsive and works seamlessly across desktop, tablet, and mobile devices.
+
+## 🔄 Continuous Development
+
+This project is under active development. Future enhancements include:
+
+- Additional AI tools for career development
+- Enhanced analytics and insights
+- Integration with job boards and application tracking
+- Community features for peer support
+
+## 🙏 Acknowledgements
+
+- [Next.js](https://nextjs.org/)
+- [React](https://reactjs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Clerk](https://clerk.dev/)
+- [Gemini AI](https://gemini.google.com/)
+- [Inngest](https://www.inngest.com/)
+- [ImageKit](https://imagekit.io/)
+
+---
+
+@ 2025 Next AI Career Agent. All rights reserved.
