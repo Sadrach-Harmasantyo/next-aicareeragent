@@ -3,6 +3,7 @@ import axios from "axios";
 import { NextResponse } from "next/server";
 import { inngest } from "@/inngest/client";
 import { currentUser } from "@clerk/nextjs/server";
+import { getRuns } from "@/lib/getRuns";
 
 export async function POST(req: Request) {
   try {
@@ -42,19 +43,19 @@ export async function POST(req: Request) {
 
       await new Promise((resolve) => setTimeout(resolve, 500));
     }
-    
+
     // Perbaikan: Pastikan data dapat di-serialisasi
     try {
       // Coba ambil data output
       const outputData = runStatus.data?.[0].output?.output[0];
-      
+
       // Jika outputData adalah objek, kembalikan langsung
-      if (typeof outputData === 'object' && outputData !== null) {
+      if (typeof outputData === "object" && outputData !== null) {
         return NextResponse.json(outputData);
       }
-      
+
       // Jika string, coba parse sebagai JSON
-      if (typeof outputData === 'string') {
+      if (typeof outputData === "string") {
         try {
           const parsedData = JSON.parse(outputData);
           return NextResponse.json(parsedData);
@@ -63,7 +64,7 @@ export async function POST(req: Request) {
           return NextResponse.json({ result: outputData });
         }
       }
-      
+
       // Fallback jika tidak ada output yang valid
       return NextResponse.json({ success: true, recordId });
     } catch (serializationError) {
@@ -73,20 +74,23 @@ export async function POST(req: Request) {
     }
   } catch (error) {
     console.error("Error processing resume:", error);
-    return NextResponse.json({ error: "Failed to process resume" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to process resume" },
+      { status: 500 }
+    );
   }
 }
 
-export async function getRuns(runId: string) {
-  const result = await axios.get(
-    `${process.env.INNGEST_SERVER_HOST}/v1/events/${runId}/runs
-`,
-    {
-      headers: {
-        Authorization: `Bearer ${process.env.INNGEST_SIGNING_KEY}`,
-      },
-    }
-  );
+// export async function getRuns(runId: string) {
+//   const result = await axios.get(
+//     `${process.env.INNGEST_SERVER_HOST}/v1/events/${runId}/runs
+// `,
+//     {
+//       headers: {
+//         Authorization: `Bearer ${process.env.INNGEST_SIGNING_KEY}`,
+//       },
+//     }
+//   );
 
-  return result.data;
-}
+//   return result.data;
+// }

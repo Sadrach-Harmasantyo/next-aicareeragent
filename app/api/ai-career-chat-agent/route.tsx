@@ -1,4 +1,5 @@
 import { inngest } from "@/inngest/client";
+import { getRuns } from "@/lib/getRuns";
 import axios from "axios";
 import { NextResponse } from "next/server";
 
@@ -29,16 +30,16 @@ export async function POST(req: any) {
   return NextResponse.json(runStatus.data?.[0].output?.output[0]);
 }
 
-export async function getRuns(runId: string) {
-  const result = await axios.get(
-    `${process.env.INNGEST_SERVER_HOST}/v1/events/${runId}/runs
-`,
-    {
-      headers: {
-        Authorization: `Bearer ${process.env.INNGEST_SIGNING_KEY}`,
-      },
-    }
-  );
+// export async function getRuns(runId: string) {
+//   const result = await axios.get(
+//     `${process.env.INNGEST_SERVER_HOST}/v1/events/${runId}/runs
+// `,
+//     {
+//       headers: {
+//         Authorization: `Bearer ${process.env.INNGEST_SIGNING_KEY}`,
+//       },
+//     }
+//   );
 
-  return result.data;
-}
+//   return result.data;
+// }

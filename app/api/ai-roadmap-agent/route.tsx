@@ -50,61 +50,62 @@
 // route.tsx
 // app/api/ai-roadmap-agent/route.tsx
 import { inngest } from "@/inngest/client"; // Pastikan path ini benar
+import { getRuns } from "@/lib/getRuns";
 import { currentUser } from "@clerk/nextjs/server";
 import axios from "axios";
 import { NextResponse } from "next/server";
 
 // Fungsi untuk mengambil status run Inngest
-export async function getRuns(runId: string) {
-  console.log(`--- SERVER LOG: getRuns called for runId: ${runId}`);
+// export async function getRuns(runId: string) {
+//   console.log(`--- SERVER LOG: getRuns called for runId: ${runId}`);
 
-  if (!process.env.INNGEST_SERVER_HOST || !process.env.INNGEST_SIGNING_KEY) {
-    console.error(
-      "--- SERVER LOG: INNGEST_SERVER_HOST or INNGEST_SIGNING_KEY is not set in environment variables."
-    );
-    throw new Error("Inngest server configuration missing.");
-  }
+//   if (!process.env.INNGEST_SERVER_HOST || !process.env.INNGEST_SIGNING_KEY) {
+//     console.error(
+//       "--- SERVER LOG: INNGEST_SERVER_HOST or INNGEST_SIGNING_KEY is not set in environment variables."
+//     );
+//     throw new Error("Inngest server configuration missing.");
+//   }
 
-  const url = `${process.env.INNGEST_SERVER_HOST}/v1/events/${runId}/runs`; // Pastikan TIDAK ADA NEWLINE
-  console.log("--- SERVER LOG: Fetching Inngest run status from URL:", url);
-  // Untuk keamanan, jangan log seluruh signing key. Cukup pastikan env var ada.
-  // console.log("--- SERVER LOG: Using INNGEST_SIGNING_KEY (first 5 chars):", process.env.INNGEST_SIGNING_KEY.substring(0,5) + "...");
+//   const url = `${process.env.INNGEST_SERVER_HOST}/v1/events/${runId}/runs`; // Pastikan TIDAK ADA NEWLINE
+//   console.log("--- SERVER LOG: Fetching Inngest run status from URL:", url);
+//   // Untuk keamanan, jangan log seluruh signing key. Cukup pastikan env var ada.
+//   // console.log("--- SERVER LOG: Using INNGEST_SIGNING_KEY (first 5 chars):", process.env.INNGEST_SIGNING_KEY.substring(0,5) + "...");
 
-  try {
-    const result = await axios.get(url, {
-      headers: {
-        Authorization: `Bearer ${process.env.INNGEST_SIGNING_KEY}`,
-        "Content-Type": "application/json",
-      },
-      timeout: 15000, // Timeout untuk request axios, misalnya 15 detik
-    });
-    console.log(
-      "--- SERVER LOG: getRuns - Axios GET successful, status:",
-      result.status
-    );
-    return result.data;
-  } catch (error) {
-    console.error(`--- SERVER LOG: Error in getRuns for runId ${runId}`);
-    if (axios.isAxiosError(error)) {
-      console.error("--- SERVER LOG: Axios error details:", {
-        message: error.message,
-        url: error.config?.url,
-        method: error.config?.method,
-        status: error.response?.status,
-        responseData: error.response?.data,
-      });
-    } else if (error instanceof Error) {
-      console.error(
-        "--- SERVER LOG: Non-Axios error details:",
-        error.message,
-        error.stack
-      );
-    } else {
-      console.error("--- SERVER LOG: Unknown error in getRuns:", error);
-    }
-    throw error; // Re-throw agar ditangkap oleh pemanggil
-  }
-}
+//   try {
+//     const result = await axios.get(url, {
+//       headers: {
+//         Authorization: `Bearer ${process.env.INNGEST_SIGNING_KEY}`,
+//         "Content-Type": "application/json",
+//       },
+//       timeout: 15000, // Timeout untuk request axios, misalnya 15 detik
+//     });
+//     console.log(
+//       "--- SERVER LOG: getRuns - Axios GET successful, status:",
+//       result.status
+//     );
+//     return result.data;
+//   } catch (error) {
+//     console.error(`--- SERVER LOG: Error in getRuns for runId ${runId}`);
+//     if (axios.isAxiosError(error)) {
+//       console.error("--- SERVER LOG: Axios error details:", {
+//         message: error.message,
+//         url: error.config?.url,
+//         method: error.config?.method,
+//         status: error.response?.status,
+//         responseData: error.response?.data,
+//       });
+//     } else if (error instanceof Error) {
+//       console.error(
+//         "--- SERVER LOG: Non-Axios error details:",
+//         error.message,
+//         error.stack
+//       );
+//     } else {
+//       console.error("--- SERVER LOG: Unknown error in getRuns:", error);
+//     }
+//     throw error; // Re-throw agar ditangkap oleh pemanggil
+//   }
+// }
 
 // Handler POST untuk API route
 export async function POST(req: Request) {
